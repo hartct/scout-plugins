@@ -37,7 +37,7 @@ class BasecampTimeReport < Scout::Plugin
     people.each do |id, details|
       report details[:name] => details[:hours]
     end
-    report :total => total_hours
+    report(:total => total_hours)
   end
 end
 
