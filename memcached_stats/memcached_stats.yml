@@ -83,3 +83,15 @@ metadata:
     delimiter: ","
     precision: "2"
     label: Evictions
+  hit_ratio: 
+    units: 
+    larger_is_better: "1"
+    delimiter: ","
+    precision: "3"
+    label: Hit Ratio
+  miss_ratio: 
+    units: 
+    larger_is_better: "0"
+    delimiter: ","
+    precision: "3"
+    label: Miss Ratio
