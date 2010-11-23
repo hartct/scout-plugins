@@ -1,12 +1,13 @@
-require File.dirname(__FILE__)+"/../test_helper"
-require File.dirname(__FILE__)+"/rails_requests"
+require File.expand_path('../../test_helper.rb', __FILE__)
+require File.expand_path('../rails_requests.rb', __FILE__)
+
 
 class RailsRequestsTest < Test::Unit::TestCase
 
   def setup
     @options=parse_defaults("rails_requests")
     @log = File.dirname(__FILE__)+"/log/production_rails_2_3.log"
-    @rails3_log = File.dirname(__FILE__)+"/log/production_rails_3b3.log"
+    @rails3_log = File.dirname(__FILE__)+"/log/production_rails_3_0.log"
     @rails2_oink_log = File.dirname(__FILE__)+"/log/production_rails_oink_2_2.log"
   end
 
@@ -76,8 +77,8 @@ class RailsRequestsTest < Test::Unit::TestCase
     plugin=RailsRequests.new(nil,{:last_request_time=>Time.parse("2010-04-26 00:00:00")},@options.merge(:log => @rails3_log, :rails_version => '3'))
     res=plugin.run
     assert_equal "0.39", res[:reports].first[:average_request_length]
-    assert_equal "0.00", res[:reports].first[:average_db_time]   # NOTE: the Rails3 Parser doesn't extract these values 4/30/2010
-    assert_equal "0.00", res[:reports].first[:average_view_time] # NOTE: the Rails3 Parser doesn't extract these values 4/30/2010
+    assert_equal "0.35", res[:reports].first[:average_db_time]   # NOTE: the Rails3 Parser doesn't extract these values 4/30/2010
+    assert_equal "0.02", res[:reports].first[:average_view_time] # NOTE: the Rails3 Parser doesn't extract these values 4/30/2010
   end
 
   def test_run_with_slow_request_rails_3
@@ -86,8 +87,7 @@ class RailsRequestsTest < Test::Unit::TestCase
     assert_equal 10, res[:reports].first[:slow_requests_percentage]
     assert_equal 1, res[:alerts].size
     assert_equal "Maximum Time(2 sec) exceeded on 1 request",res[:alerts].first[:subject]
-    # don't have view / db breakdown yet for Rails 3
-    assert_equal "/home\nCompleted in 2.1s (View: s, DB: s) | Status: 200\n\n", res[:alerts].first[:body]
+    assert_equal "/home\nCompleted in 2.1s (View: 1.9s, DB: 0.1s) | Status: 200\n\n", res[:alerts].first[:body]
   end
 
   def test_ignored_slow_request_rails_3

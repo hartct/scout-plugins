@@ -1,5 +1,6 @@
-require File.dirname(__FILE__)+"/../test_helper"
-require File.dirname(__FILE__)+"/haproxy_stats"
+require File.expand_path('../../test_helper.rb', __FILE__)
+require File.expand_path('../haproxy_stats.rb', __FILE__)
+
 require 'open-uri'
 class HaProxyTest < Test::Unit::TestCase
 

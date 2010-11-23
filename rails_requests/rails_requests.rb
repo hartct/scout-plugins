@@ -1,6 +1,9 @@
 require "time"
 require "stringio"
 
+# IMPORTANT! Requiring Rubygems is NOT a best practice. See http://scoutapp.com/info/creating_a_plugin#libraries
+# This plugin is an exception because we need to modify the Elif library (both here and below) before the plugin's build_report method is run.
+require 'rubygems'
 require 'elif'
 Elif.send(:remove_const, :MAX_READ_SIZE); Elif::MAX_READ_SIZE = 1024*100
 
@@ -19,6 +22,7 @@ class RailsRequests < Scout::Plugin
     name: Max Memory Difference (MB)
     notes: If any request results in a change in memory larger than this amount, an alert is generated. The Oink plugin must be installed in your Rails application.
     default: 50
+    attributes: advanced
   rla_run_time:
     name: Request Log Analyzer Run Time (HH:MM)
     notes: It's best to schedule these summaries about fifteen minutes before any logrotate cron job you have set would kick in. The time should be in the server timezone.
@@ -30,7 +34,6 @@ class RailsRequests < Scout::Plugin
     attributes: advanced
   rails_version:
     notes: "The version of Ruby on Rails used for this application (examples: 2, 2.2, 3). If none is provided, defaults to 2."
-    attributes: advanced
   EOS
 
   needs "request_log_analyzer"
@@ -92,7 +95,7 @@ class RailsRequests < Scout::Plugin
     generate_slow_request_alerts
     generate_memory_leak_alerts
     
-    remember(:last_request_time, Time.parse(last_request_time.to_s) || Time.now)
+    remember(:last_request_time, last_request_time ? Time.parse(last_request_time.to_s) : Time.now)
 
     report(aggregate)
   rescue Errno::ENOENT => e
@@ -260,8 +263,13 @@ class RailsRequests < Scout::Plugin
       # url is in :completed in rails2; path is in :started in rails3
       # only test for ignored_actions if we actually have an ignored_actions regex
       if @ignored_actions.nil? || (@ignored_actions.is_a?(Regexp) && !@ignored_actions.match(url))
-        @slow_request_count += 1                
-        @slow_requests += "#{url}\nCompleted in #{request[:duration]}s (View: #{request[:view]}s, DB: #{request[:db]}s) | Status: #{request[:status]}\n\n"
+        @slow_request_count += 1         
+        slow_request_string = "#{url[0..200]}\nCompleted in #{request[:duration]}s"
+        if request[:view] and request[:db]
+          slow_request_string << " (View: #{request[:view]}s, DB: #{request[:db]}s)"
+        end     
+        slow_request_string << " | Status: #{request[:status]}\n\n"
+        @slow_requests += slow_request_string
       end
     end
   end

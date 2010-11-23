@@ -1,10 +1,10 @@
-Started GET "/home" for 127.0.0.1 at 2010-04-27 17:59:32
+Started GET "/home" for 127.0.0.1 at Tue Apr 27 17:59:32 -0700 2010
   Processing by HomeController#index as HTML
 Rendered home/index.html.haml within layouts/application (666.2ms)
 Completed 200 OK in 811ms (Views: 652.7ms | ActiveRecord: 31.6ms)
 
 
-Started GET "/dates/2010-04-15" for 127.0.0.1 at 2010-04-27 17:59:37
+Started GET "/dates/2010-04-15" for 127.0.0.1 at Tue Apr 27 17:59:37 -0700 2010
   Processing by DatesController#show as HTML
   Parameters: {"id"=>"2010-04-15"}
 Rendered dates/_date.html.haml (21.8ms)
@@ -12,18 +12,18 @@ Rendered dates/show.html.haml within layouts/application (227.6ms)
 Completed 200 OK in 235ms (Views: 231.3ms | ActiveRecord: 5.1ms)
 
 
-Started GET "/clients" for 127.0.0.1 at 2010-04-27 17:59:39
+Started GET "/clients" for 127.0.0.1 at Tue Apr 27 17:59:39 -0700 2010
   Processing by ClientsController#index as HTML
 Rendered clients/index.html.haml within layouts/application (44.1ms)
 Completed 200 OK in 54ms (Views: 44.9ms | ActiveRecord: 8.2ms)
 
-Started GET "/home" for 127.0.0.1 at 2010-04-27 17:59:32
+Started GET "/home" for 127.0.0.1 at Tue Apr 27 17:59:32 -0700 2010
   Processing by HomeController#index as HTML
 Rendered home/index.html.haml within layouts/application (666.2ms)
 Completed 200 OK in 2100ms (Views: 1900ms | ActiveRecord: 100ms)
 
 
-Started GET "/dates/2010-04-15" for 127.0.0.1 at 2010-04-27 17:59:37
+Started GET "/dates/2010-04-15" for 127.0.0.1 at Tue Apr 27 17:59:37 -0700 2010
   Processing by DatesController#show as HTML
   Parameters: {"id"=>"2010-04-15"}
 Rendered dates/_date.html.haml (21.8ms)
@@ -31,33 +31,33 @@ Rendered dates/show.html.haml within layouts/application (227.6ms)
 Completed 200 OK in 235ms (Views: 231.3ms | ActiveRecord: 5.1ms)
 
 
-Started GET "/clients" for 127.0.0.1 at 2010-04-27 17:59:39
+Started GET "/clients" for 127.0.0.1 at Tue Apr 27 17:59:39 -0700 2010
   Processing by ClientsController#index as HTML
 Rendered clients/index.html.haml within layouts/application (44.1ms)
 Completed 200 OK in 54ms (Views: 44.9ms | ActiveRecord: 8.2ms)
 
 
-Started GET "/invoices" for 127.0.0.1 at 2010-04-27 17:59:44
+Started GET "/invoices" for 127.0.0.1 at Tue Apr 27 17:59:44 -0700 2010
   Processing by InvoicesController#index as HTML
 Rendered invoices/_invoices.html.haml (15.7ms)
 Rendered invoices/index.html.haml within layouts/application (26.4ms)
 Completed 200 OK in 37ms (Views: 28.1ms | ActiveRecord: 4.3ms)
 
 
-Started GET "/clients/1" for 127.0.0.1 at 2010-04-27 17:59:46
+Started GET "/clients/1" for 127.0.0.1 at Tue Apr 27 17:59:46 -0700 2010
   Processing by ClientsController#show as HTML
   Parameters: {"id"=>"1"}
 Rendered clients/show.html.haml within layouts/application (219.7ms)
 Completed 200 OK in 243ms (Views: 228.9ms | ActiveRecord: 15.0ms)
 
 
-Started GET "/projects" for 127.0.0.1 at 2010-04-27 17:59:50
+Started GET "/projects" for 127.0.0.1 at Tue Apr 27 17:59:50 -0700 2010
   Processing by ProjectsController#index as HTML
 Rendered projects/index.html.haml within layouts/application (28.4ms)
 Completed 200 OK in 122ms (Views: 120.2ms | ActiveRecord: 3.2ms)
 
 
-Started GET "/projects/2" for 127.0.0.1 at 2010-04-27 17:59:53
+Started GET "/projects/2" for 127.0.0.1 at Tue Apr 27 17:59:53 -0700 2010
   Processing by ProjectsController#show as HTML
   Parameters: {"id"=>"2"}
 Rendered activities/_activities.html.haml (3.2ms)

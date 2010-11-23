@@ -1,5 +1,6 @@
-require File.dirname(__FILE__)+"/../test_helper"
-require File.dirname(__FILE__)+"/apache_analyzer"
+require File.expand_path('../../test_helper.rb', __FILE__)
+require File.expand_path('../apache_analyzer.rb', __FILE__)
+
 
 class ApacheAnalyzerTest < Test::Unit::TestCase
 
@@ -19,6 +20,19 @@ class ApacheAnalyzerTest < Test::Unit::TestCase
       assert_equal 68, res[:reports].first[:lines_scanned]
       assert_in_delta 67.96, res[:reports].first[:request_rate].to_f, 1
       assert_equal 0.36.to_s, res[:reports].first[:average_request_length]
+      # note - this is stored in the timezone of this server
+      assert_equal Time.parse("Sun Apr 11 17:22:04 -0700 2010"), res[:memory][:last_request_time]
+    end
+  end
+  
+  def test_run_with_unrecognized_line
+    log = File.dirname(__FILE__)+"/unrecognized_line.log"
+    time = Time.parse(@last_request_time) 
+    Timecop.travel(time) do 
+      plugin=ApacheAnalyzer.new(nil,{},{:log => log, :format => @duration_format})
+      res = plugin.run()
+      assert_equal 3, res[:reports].first[:lines_scanned]
+      assert_equal 0.06.to_s, res[:reports].first[:average_request_length]
       # note - this is stored in the timezone of this server
       assert_equal Time.parse("Sun Apr 11 17:22:04 -0700 2010"), res[:memory][:last_request_time]
     end

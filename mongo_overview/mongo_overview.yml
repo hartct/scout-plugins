@@ -1,0 +1,69 @@
+metadata: 
+  btree_miss_ratio: 
+    units: "%"
+    precision: "1"
+    label: Btree miss ratio
+  indexes: 
+    precision: "0"
+    label: Indexes
+  global_lock_ratio: 
+    units: "%"
+    precision: "1"
+    label: Global lock ratio
+  btree_hits: 
+    units: /sec
+    precision: "2"
+    label: Btree hits
+  btree_misses: 
+    units: /sec
+    precision: "2"
+    label: Btree misses
+  index_size: 
+    units: bytes
+    precision: "0"
+    label: Size of Index
+  storage_size: 
+    units: bytes
+    precision: "0"
+    label: Size of Storage
+  data_size: 
+    units: bytes
+    precision: "0"
+    label: Size of Data
+  btree_accesses: 
+    units: /sec
+    precision: "2"
+    label: Btree accesses
+  objects: 
+    units: ""
+    precision: "0"
+    label: Objects
+  op_updates: 
+    units: /sec
+    precision: "2"
+    label: Op Updates
+  op_inserts: 
+    units: /sec
+    precision: "2"
+    label: Op Inserts
+  op_queries: 
+    units: /sec
+    precision: "2"
+    label: Op Queries
+  op_deletes: 
+    units: /sec
+    precision: "2"
+    label: Op Deletes
+  op_get_mores: 
+    units: /sec
+    precision: "2"
+    label: Op Get mores
+    
+triggers:    
+  - type: trend
+    data_series_name: op_queries
+    min_value: 50.0
+    direction: UP                            
+    percentage_change: 100
+    duration: 180                           
+    window_reference: LAST_WEEK

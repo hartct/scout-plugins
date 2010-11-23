@@ -9,6 +9,7 @@ class PostgresqlMonitoring< Scout::Plugin
     password:
       name: PostgreSQL password
       notes: Specify the password to connect with
+      attributes: password
     host:
       name: PostgreSQL host
       notes: Specify the host name of the PostgreSQL server. If the value begins with

@@ -18,11 +18,11 @@ metadata:
     label: Total Queries
     units: /sec
 
-triggers:
+triggers:    
   - type: trend
     data_series_name: total
     min_value: 50.0
-    direction: UP
+    direction: UP                            
     percentage_change: 100
-    duration: 180
+    duration: 180                           
     window_reference: LAST_WEEK

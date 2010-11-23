@@ -8,7 +8,14 @@ class UrlMonitor < Scout::Plugin
   
   TEST_USAGE = "#{File.basename($0)} url URL last_run LAST_RUN"
   TIMEOUT_LENGTH = 50 # seconds
-  
+
+  OPTIONS=<<-EOS
+  url:
+    name: Url
+    notes: The full URL (including http://) of the URL to monitor. You can provide basic authentication options as well (http://user:pass@domain.com)
+    default: "http://www.scoutapp.com/"
+  EOS
+
   def build_report
     url = option("url").to_s.strip
     if url.empty?
@@ -72,7 +79,10 @@ class UrlMonitor < Scout::Plugin
     retry_url_execution_expired = true
     begin
       http = Net::HTTP.new(uri.host,uri.port)
-      http.use_ssl = url =~ %r{\Ahttps://}
+      if url =~ %r{\Ahttps://}
+        http.use_ssl = true
+        http.verify_mode=OpenSSL::SSL::VERIFY_NONE
+      end
       http.start(){|http|
             http.open_timeout = TIMEOUT_LENGTH
             req = Net::HTTP::Get.new((uri.path != '' ? uri.path : '/' ) + (uri.query ? ('?' + uri.query) : ''))

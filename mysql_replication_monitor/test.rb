@@ -1,5 +1,6 @@
-require File.dirname(__FILE__)+"/../test_helper"
-require File.dirname(__FILE__)+"/mysql_replication_monitor"
+require File.expand_path('../../test_helper.rb', __FILE__)
+require File.expand_path('../mysql_replication_monitor.rb', __FILE__)
+
 require 'mysql'
 
 class MysqlReplicationMonitorTest < Test::Unit::TestCase

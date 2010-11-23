@@ -1,0 +1,30 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    bson (1.0.7)
+    elif (0.1.0)
+    fakeweb (1.3.0)
+    mocha (0.9.8)
+      rake
+    mongo (1.0.8)
+      bson (>= 1.0.5)
+    mysql (2.8.1)
+    pg (0.9.0)
+    rake (0.8.7)
+    request-log-analyzer (1.8.1)
+    scout (5.1.4)
+      elif
+    timecop (0.3.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  fakeweb
+  mocha
+  mongo
+  mysql
+  pg
+  request-log-analyzer
+  scout
+  timecop

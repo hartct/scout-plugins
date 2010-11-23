@@ -33,11 +33,11 @@ metadata:
 triggers:
   - type: peak
     dname: memory
-    max_value: 10
+    max_value: 100
   - type: trend
     dname: memory
     direction: UP
-    percentage_change: 20
+    percentage_change: 100
     duration: 60
     window_reference: LAST_WEEK
     min_value: 5

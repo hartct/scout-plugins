@@ -1,5 +1,6 @@
-require File.dirname(__FILE__)+"/../test_helper"
-require File.dirname(__FILE__)+"/postgresql_monitoring"
+require File.expand_path('../../test_helper.rb', __FILE__)
+require File.expand_path('../postgresql_monitoring.rb', __FILE__)
+
 require 'pg'
 
 class PostgresqlMonitoringTest < Test::Unit::TestCase

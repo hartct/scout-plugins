@@ -65,9 +65,9 @@ class OverviewWithAlerts < Scout::Plugin
     memory_used_threshold=option(:memory_used_threshold).to_i
     minutes_between_notifications=option(:minutes_between_notifications).to_i
 
-    # determine whether to use /proc/meminfo or /proc/beancounters
+    # determine whether to use /proc/meminfo or /proc/user_beancounters
     if File.exist?('/proc/user_beancounters')
-      lines=shell('beanc').split(/\n/)      
+      lines=shell('sudo cat /proc/user_beancounters').split(/\n/)
       lines=lines.slice(2,lines.size-1) # discard the first two lines -- they are version and column headings, respectively
 
       if lines.grep(/^\s*0:/).any? # if a line contains uid=0, this is a VPS host -- use /proc/meminfo instead

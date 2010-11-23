@@ -1,5 +1,6 @@
-require File.dirname(__FILE__)+"/../test_helper"
-require File.dirname(__FILE__)+"/passenger_memory_stats"
+require File.expand_path('../../test_helper.rb', __FILE__)
+require File.expand_path('../passenger_memory_stats.rb', __FILE__)
+
 
 class PassengerMemoryStatsTest < Test::Unit::TestCase
 
