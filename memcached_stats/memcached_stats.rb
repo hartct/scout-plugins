@@ -34,8 +34,10 @@ class MemcachedStats < Scout::Plugin
     if hits_per_sec && misses_per_sec
       gets_per_sec    = hits_per_sec + misses_per_sec
       report(:gets_per_sec  => gets_per_sec)
-      report(:hit_ratio     => (hits_per_sec   / gets_per_sec))
-      report(:miss_ratio    => (misses_per_sec / gets_per_sec))
+      if gets_per_sec > 0
+        report(:hit_ratio     => (hits_per_sec   / gets_per_sec))
+        report(:miss_ratio    => (misses_per_sec / gets_per_sec))
+      end
     end
 
     counter(:evictions_per_sec,     stats['evictions'].to_i,     :per => :second)
