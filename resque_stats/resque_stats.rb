@@ -26,22 +26,22 @@ class ResqueStats < Scout::Plugin
     Resque.redis.namespace = option(:namespace) || :resque
     info = Resque.info
     report(
-      :working => info[:working],
-      :pending => info[:pending],
-      :total_failed  => info[:failed],
-      :queues  => info[:queues],
-      :workers => info[:workers]
+      :working_count => info[:working],
+      :pending_count => info[:pending],
+      :total_failed_count  => info[:failed],
+      :queue_count => info[:queues],
+      :worker_count => info[:workers]
     )
-    counter(:processed, info[:processed], :per => String.new(option(:metric_interval)).to_sym)
-    counter(:failed, info[:failed], :per => String.new(option(:metric_interval)).to_sym)
-		counter(:workers, info[:workers], :per => String.new(option(:metric_interval)).to_sym)
+    counter(:processed_rate, info[:processed], :per => String.new(option(:metric_interval)).to_sym)
+    counter(:failed_rate, info[:failed], :per => String.new(option(:metric_interval)).to_sym)
+		counter(:workers_rate, info[:workers], :per => String.new(option(:metric_interval)).to_sym)
     Resque.queues.each do |queue|
-      report("#{queue}" => Resque.size(queue))
+      report("#{queue}_count" => Resque.size(queue))
     end
 		
 		if option(:resque_scheduler)
-			counter(:delayed_jobs, Array(Resque.redis.keys("delayed:*")).length, :per => String.new(option(:metric_interval)).to_sym)
-			report("delayed_jobs" => Array(Resque.redis.keys("delayed:*")).length)
+			counter(:delayed_jobs_rate, Array(Resque.redis.keys("delayed:*")).length, :per => String.new(option(:metric_interval)).to_sym)
+			report(:delayed_job_count => Array(Resque.redis.keys("delayed:*")).length)
 		end
 
   end
