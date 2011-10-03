@@ -41,7 +41,7 @@ class ResqueStats < Scout::Plugin
 		
 		if option(:resque_scheduler)
 			counter(:delayed_jobs, Array(Resque.redis.keys("delayed:*")).length, :per => String.new(option(:metric_interval)).to_sym)
-			report("delayed jobs" => Array(Resque.redis.keys("delayed:*")).length)
+			report("delayed_jobs" => Array(Resque.redis.keys("delayed:*")).length)
 		end
 
   end
